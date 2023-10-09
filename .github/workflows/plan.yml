@@ -34,6 +34,6 @@ jobs:
           cdktfVersion: 0.17.0
           terraformVersion: 1.5.2
           mode: plan-only
-          stackName: my-stack
+          stackName: aloha-hp-infra
           terraformCloudToken: ${{ secrets.TF_API_TOKEN }}
           githubToken: ${{ secrets.GITHUB_TOKEN }}
