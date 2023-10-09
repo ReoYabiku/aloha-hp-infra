@@ -1,0 +1,44 @@
+name: "Apply Stack after PR is Merged"
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: read
+
+jobs:
+  terraform:
+    name: "Terraform CDK Deploy"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Generate module and provider bindings
+        run: npx cdktf-cli get
+
+      # Remove this step if you don't have any
+      - name: Run unit tests
+        run: yarn test
+
+      - name: Run Terraform CDK
+        uses: hashicorp/terraform-cdk-action@v0.1
+        with:
+          cdktfVersion: 0.17.0
+          terraformVersion: 1.5.2
+          mode: auto-approve-apply
+          stackName: my-stack
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
+        env:
+          TF_TOKEN_app_terraform_io: ${{ secrets.TF_API_TOKEN }}
