@@ -38,7 +38,7 @@ jobs:
           cdktfVersion: 0.17.0
           terraformVersion: 1.5.2
           mode: auto-approve-apply
-          stackName: my-stack
+          stackName: aloha-hp-infra
           githubToken: ${{ secrets.GITHUB_TOKEN }}
         env:
           TF_TOKEN_app_terraform_io: ${{ secrets.TF_API_TOKEN }}
