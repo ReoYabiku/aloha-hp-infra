@@ -28,7 +28,7 @@ class MyStack extends TerraformStack {
       keyName: keyPair.keyName,
 
       tags: {
-        Name: "cdktf-instance",
+        Name: "deploy-success",
       }
     })
     
